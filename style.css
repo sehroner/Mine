@@ -1,0 +1,380 @@
+/* ============================================================
+   PERSONALIZACIÓN RÁPIDA DE COLORES Y TIPOGRAFÍA
+   ============================================================ */
+:root {
+  --cream: #f7f4ee;
+  --cream-soft: #efeae1;
+  --ink: #201d1a;
+  --ink-soft: #55504a;
+  --wine: #6e2430;
+  --wine-soft: #8a4550;
+  --line: #dcd5c8;
+  --atleti-red: #a33b3b;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+html, body { height: 100%; overscroll-behavior: none; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 5.8vw, 1.85rem);
+  line-height: 1.25;
+  margin: 0 0 0.85rem;
+}
+
+p { margin: 0 0 0.8rem; }
+
+/* ================= CONTENEDOR DE PANTALLAS ================= */
+.screens { position: relative; width: 100%; height: 100dvh; overflow: hidden; }
+
+.screen-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.3rem calc(2.6rem + env(safe-area-inset-bottom));
+  opacity: 0;
+  transform: translateY(14px) scale(0.99);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  background: var(--cream);
+}
+.screen-step.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; z-index: 2; }
+.dark-step { background: var(--ink); color: var(--cream); }
+
+.screen-inner {
+  width: 100%;
+  max-width: 400px;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.visual-box {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-inner p { color: var(--ink-soft); font-size: 0.96rem; }
+.dark-step .screen-inner p { color: rgba(247, 244, 238, 0.75); }
+
+.humor, .mid-line {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink) !important;
+  font-size: 0.93rem;
+}
+.dark-step .humor, .dark-step .mid-line { border-top-color: rgba(247, 244, 238, 0.18); color: var(--cream) !important; }
+
+.milestone-emph {
+  color: var(--wine) !important;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-top: 0.4rem;
+}
+.dark-step .milestone-emph { color: var(--wine-soft) !important; }
+
+/* ---------- Revelado secuencial genérico ---------- */
+.seq {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.seq.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------- Botón flotante de música ---------- */
+.music-btn {
+  position: fixed;
+  top: env(safe-area-inset-top, 0.9rem);
+  right: 0.9rem;
+  z-index: 80;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(247, 244, 238, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  min-height: 40px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.music-btn.playing { color: var(--wine); border-color: var(--wine-soft); }
+
+/* ================= BOTONES ================= */
+.btn-ghost {
+  font-size: 0.94rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 48px;
+  margin-top: 1.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.btn-ghost:hover, .btn-ghost:focus-visible { background: var(--ink); color: var(--cream); }
+.dark-step .btn-ghost { color: var(--cream); border-color: var(--cream); }
+.dark-step .btn-ghost:hover, .dark-step .btn-ghost:focus-visible { background: var(--cream); color: var(--ink); }
+.btn-ghost:focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; }
+.btn-ghost:active { transform: scale(0.97); }
+
+.btn-solid {
+  font-size: 1rem;
+  color: var(--cream);
+  background: var(--wine);
+  border: 1px solid var(--wine);
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 52px;
+  width: 100%;
+  max-width: 270px;
+  transition: transform 0.25s ease, background 0.3s ease;
+}
+.btn-solid:hover, .btn-solid:focus-visible { background: var(--wine-soft); }
+.btn-solid:active { transform: scale(0.97); }
+.btn-solid:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+
+.btn-text {
+  display: block;
+  font-size: 0.83rem;
+  color: rgba(247, 244, 238, 0.65);
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 0.5rem auto 0;
+}
+.btn-text:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+
+.question-buttons { display: flex; flex-direction: column; align-items: center; }
+
+/* ---------- Easter eggs ---------- */
+.egg-word {
+  font: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted var(--wine-soft);
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  min-height: 32px;
+}
+.egg-atleti {
+  display: block;
+  margin: 1.3rem auto 1.6rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  border-bottom-color: var(--atleti-red);
+  max-width: 300px;
+}
+
+/* ================= 01. PORTADA ================= */
+.intro-inner { max-width: 330px; }
+.date-mark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 11.5vw, 3.1rem);
+  color: var(--wine);
+  margin: 0 0 1.2rem;
+}
+.intro-line { font-family: var(--font-display); font-size: clamp(0.98rem, 4.4vw, 1.15rem); color: var(--ink-soft); margin-bottom: 0.45rem; }
+.intro-line-strong { color: var(--ink); }
+
+/* ---------- Pista de pádel ---------- */
+.court { position: relative; width: 100%; height: 100%; background: var(--cream-soft); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.court-line { position: absolute; left: 50%; top: 12%; bottom: 12%; width: 1px; background: var(--line); transform: translateX(-50%); }
+.court-line-2 { left: 12%; right: 12%; top: 50%; bottom: auto; width: auto; height: 1px; transform: none; }
+.padel-ball { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--wine); top: 30%; left: 18%; animation: bounce-ball 3.2s ease-in-out infinite; }
+@keyframes bounce-ball {
+  0% { left: 18%; top: 30%; } 25% { left: 45%; top: 68%; }
+  50% { left: 72%; top: 25%; } 75% { left: 45%; top: 55%; }
+  100% { left: 18%; top: 30%; }
+}
+
+/* ---------- Pantalla 3: lista tipográfica ---------- */
+.tally { text-align: left; margin-bottom: 0.5rem; }
+.tally p { font-size: 0.96rem; color: var(--ink-soft); margin-bottom: 0.7rem; display: flex; flex-direction: column; gap: 0.1rem; }
+.tally span { color: var(--wine-soft); font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.tally-line { color: var(--ink) !important; font-family: var(--font-display); font-style: italic; margin-bottom: 0.6rem; }
+
+/* ---------- TV (medio cita) ---------- */
+.tv-card { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.tv-screen { width: 116px; height: 80px; background: var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.tv-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--wine-soft); animation: tv-pulse 2.4s ease-in-out infinite; }
+@keyframes tv-pulse { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
+.tv-stand { width: 38px; height: 8px; background: var(--cream-soft); border: 1px solid var(--line); margin-top: 6px; border-radius: 0 0 4px 4px; }
+
+/* ---------- 05. 26 de julio ---------- */
+.big-date { display: flex; flex-direction: column; align-items: center; line-height: 0.95; margin-bottom: 1.1rem; }
+.big-date-day { font-family: var(--font-display); font-weight: 600; font-size: clamp(3.8rem, 21vw, 5.6rem); color: var(--ink); }
+.big-date-month { font-size: 0.82rem; letter-spacing: 0.3em; color: var(--wine); margin-top: 0.4rem; }
+.big-date-year { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-soft); margin-top: 0.15rem; }
+.milestone-line { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); margin-bottom: 0.3rem; }
+.heart-mark { font-size: 0.9em; }
+
+.choco-card { width: 110px; margin: 1rem auto; cursor: pointer; }
+.choco-wrapper { padding: 7px; background: var(--wine); border-radius: 8px; }
+.choco-bar { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 4px; background: var(--ink); padding: 5px; border-radius: 6px; height: 62px; }
+.choco-square { background: var(--ink); border: 1px solid rgba(247, 244, 238, 0.18); border-radius: 2px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.choco-card:hover .choco-piece, .choco-card:focus-visible .choco-piece, .choco-card.opened .choco-piece {
+  transform: translate(5px, -5px) rotate(4deg);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.18);
+}
+.choco-card:focus-visible { outline: 2px solid var(--wine); outline-offset: 4px; }
+
+/* ---------- 06. Verja del parque ---------- */
+.gate-card { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.gate {
+  position: relative; width: 122px; height: 122px;
+  background: var(--cream-soft); border: 1px solid var(--line); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 8px; overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.gate-bar { width: 6px; height: 78px; background: var(--ink); border-radius: 2px; animation: gate-close 3.4s ease-in-out infinite; transition: transform 0.5s ease; }
+.gate-bar:nth-child(2) { animation-delay: 0.15s; }
+.gate-bar:nth-child(3) { animation-delay: 0.3s; }
+.gate-bar:nth-child(4) { animation-delay: 0.45s; }
+@keyframes gate-close { 0%, 70%, 100% { transform: scaleY(1); } 85% { transform: scaleY(1.08); } }
+.gate-lock { position: absolute; bottom: 11px; width: 19px; height: 15px; background: var(--wine); border-radius: 3px; transition: opacity 0.4s ease, transform 0.4s ease; }
+.gate-lock::before { content: ""; position: absolute; top: -9px; left: 3px; width: 13px; height: 13px; border: 3px solid var(--wine); border-bottom: none; border-radius: 8px 8px 0 0; }
+
+/* Estado "abriéndose", añadido brevemente por JS al pulsar el botón */
+.gate.opening .gate-bar { transform: scaleY(0.15) translateY(40%); }
+.gate.opening .gate-lock { opacity: 0; transform: translateY(-10px) rotate(-12deg); }
+
+/* ---------- 07. Atardecer ---------- */
+.sunset-card { width: 100%; height: 100%; }
+.sunset-sky {
+  position: relative; width: 100%; height: 100%; border-radius: 4px; overflow: hidden;
+  background: linear-gradient(180deg, #d9b7a3 0%, var(--cream-soft) 55%, var(--cream) 100%);
+  border: 1px solid var(--line);
+}
+.sunset-sun { position: absolute; top: 32%; left: 50%; width: 46px; height: 46px; border-radius: 50%; background: var(--wine-soft); transform: translate(-50%, -50%); }
+.sunset-hill { position: absolute; bottom: 0; left: -10%; width: 120%; height: 38%; background: var(--ink); border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+
+/* ---------- 08. Tarjetas ---------- */
+.future-grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin: 1.2rem 0 0.3rem; }
+.future-card { position: relative; aspect-ratio: 1 / 1; border-radius: 4px; border: 1px solid var(--line); background: var(--cream-soft); cursor: pointer; padding: 0; overflow: hidden; }
+.future-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0.55rem; transition: opacity 0.4s ease; }
+.future-front { opacity: 1; }
+.future-label { font-size: 0.76rem; color: var(--ink-soft); }
+.future-back { opacity: 0; color: var(--ink); font-size: 0.74rem; background: var(--cream-soft); }
+.future-card:hover .future-front, .future-card:focus-visible .future-front, .future-card.revealed .future-front { opacity: 0; }
+.future-card:hover .future-back, .future-card:focus-visible .future-back, .future-card.revealed .future-back { opacity: 1; }
+.future-card:focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; }
+
+/* ---------- 10. La pregunta ---------- */
+.question-lead { font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.5rem; }
+.question-sub { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.question-main { font-family: var(--font-display); font-size: clamp(1.45rem, 7vw, 1.95rem); color: var(--wine-soft); margin: 1.2rem 0 1.7rem; }
+
+/* ---------- 11. El sí ---------- */
+.dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.dim-overlay.flash { animation: dim-pulse 0.9s ease forwards; }
+@keyframes dim-pulse { 0% { opacity: 0; } 30% { opacity: 0.35; } 100% { opacity: 0; } }
+
+.si-word { font-family: var(--font-display); font-size: 1.5rem; color: var(--cream); margin-bottom: 0.6rem; }
+.si-line { font-size: 0.98rem; color: rgba(247, 244, 238, 0.8); margin-bottom: 0.8rem; }
+.si-date { font-family: var(--font-display); font-size: clamp(1.6rem, 8vw, 2.2rem); color: var(--wine-soft); margin-bottom: 0.8rem; }
+.si-close { font-size: 0.92rem; color: rgba(247, 244, 238, 0.7); margin-bottom: 1.4rem; }
+
+.celebration { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+.celebration-particle { position: absolute; bottom: -10px; font-size: 1rem; opacity: 0; animation: float-up 2.6s ease-in forwards; }
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(0) translateX(0) scale(0.8); }
+  15% { opacity: 0.85; }
+  100% { opacity: 0; transform: translateY(-60vh) translateX(var(--drift, 0px)) scale(1); }
+}
+
+/* ---------- 12. Final ---------- */
+.finale-title { font-family: var(--font-display); font-size: clamp(1.35rem, 5.8vw, 1.8rem); margin-bottom: 0.75rem; }
+.finale-date-light { font-family: var(--font-display); color: var(--wine); font-size: 1.02rem; margin-bottom: 0.95rem; }
+.finale-thanks { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 1.4rem; }
+
+/* ================= INDICADOR DE PROGRESO ================= */
+.progress-dots {
+  position: fixed;
+  left: 50%;
+  bottom: calc(1.1rem + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  z-index: 70;
+  transition: opacity 0.4s ease;
+}
+.progress-dots.hidden { opacity: 0; pointer-events: none; }
+.progress-dots .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-soft); opacity: 0.35; transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease; }
+.progress-dots .dot.active { opacity: 1; transform: scale(1.3); background: var(--wine); }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%; bottom: calc(3.4rem + env(safe-area-inset-bottom));
+  transform: translate(-50%, 12px);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.85rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 90;
+  max-width: 86vw;
+  text-align: center;
+}
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* ================= ESCRITORIO ================= */
+@media (min-width: 760px) {
+  .screen-inner { max-width: 460px; }
+}

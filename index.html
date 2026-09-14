@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>26.07.2026 — Nuestra historia</title>
+
+<!--
+  ============================================================
+  CÓMO PERSONALIZAR ESTA WEB (v5 — versión final)
+  ============================================================
+  1. 12 pantallas completas, cada una un <section class="screen-step">.
+     Los textos están marcados "MODIFICAR AQUÍ" dentro de cada una.
+  2. La navegación (botones "next-btn") avanza automáticamente a la
+     siguiente pantalla del HTML, controlada por script.js. No hay
+     scroll de página.
+  3. No hay fotografías: todo lo visual es CSS. La música es
+     opcional y se configura en script.js, en "PERSONALIZACIÓN".
+  4. Antes de publicar: pruébala en 320–430px de ancho y en un
+     móvil real si puedes (Safari iPhone y Chrome Android).
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button id="music-toggle" class="music-btn" aria-label="Activar música">
+  <span class="music-icon">♫</span><span class="music-label">Música</span>
+</button>
+
+<div class="screens" id="screens">
+
+  <!-- ============ 01 — PORTADA ============ data-dot="0" -->
+  <section class="screen-step active" id="s-intro" data-dot="0">
+    <div class="screen-inner intro-inner">
+      <p class="date-mark seq" data-delay="0">26.07.2026</p>
+      <p class="intro-line seq" data-delay="500">Hay días que empiezan como cualquier otro.</p>
+      <p class="intro-line intro-line-strong seq" data-delay="1150">Y luego están los que empiezan historias.</p>
+      <button class="btn-ghost seq" data-delay="1800">Descubrir nuestra historia →</button>
+    </div>
+  </section>
+
+  <!-- ============ 02 — PÁDEL ============ data-dot="1" -->
+  <section class="screen-step" id="s-padel" data-dot="1">
+    <div class="screen-inner">
+      <div class="visual-box">
+        <div class="court" aria-hidden="true">
+          <div class="court-line"></div>
+          <div class="court-line court-line-2"></div>
+          <div class="padel-ball"></div>
+        </div>
+      </div>
+      <h2>Todo empezó en una pista.</h2>
+      <!-- MODIFICAR AQUÍ -->
+      <p>Yo entré a un partido de Playtomic en el que tú ya estabas.</p>
+      <p>Y empezamos como rivales.</p>
+      <p class="humor">Sin saber demasiado bien que acabaríamos aquí.</p>
+      <button class="btn-ghost">Seguir →</button>
+    </div>
+  </section>
+
+  <!-- ============ 03 — PRIMERA IMPRESIÓN ============ data-dot="2" -->
+  <section class="screen-step" id="s-impresion" data-dot="2">
+    <div class="screen-inner">
+      <!-- MODIFICAR AQUÍ -->
+      <div class="tally">
+        <p><span>Primer partido</span>Rivales.</p>
+        <p><span>Primeras conversaciones</span>Casi ninguna.</p>
+        <p>
+          <span>Primera impresión</span>
+          <button class="egg-word" id="egg-seco" type="button">Un poco seco.</button>
+        </p>
+      </div>
+      <p class="tally-line">Buen comienzo. 😂</p>
+      <p class="mid-line">Por suerte, después del tercer partido decidimos jugar juntos.</p>
+      <p class="humor">Menos mal que no me juzgaste demasiado rápido.</p>
+      <button class="btn-ghost">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ============ 04 — PRIMERA ESPECIE DE CITA ============ data-dot="3" -->
+  <section class="screen-step" id="s-cita" data-dot="3">
+    <div class="screen-inner">
+      <div class="visual-box">
+        <div class="tv-card" aria-hidden="true">
+          <div class="tv-screen"><span class="tv-dot"></span></div>
+          <div class="tv-stand"></div>
+        </div>
+      </div>
+      <h2>Primera especie de cita.</h2>
+      <!-- MODIFICAR AQUÍ -->
+      <p>No sé si aquello contaba oficialmente como una cita...</p>
+      <p>Pero vimos la final del Mundial en casa de tu hermana, con ella y tu cuñado.</p>
+      <p>Así que algo de cita tenía.</p>
+      <p class="humor">Aunque todavía no sabíamos muy bien qué era aquello.</p>
+      <button class="btn-ghost">Seguir →</button>
+    </div>
+  </section>
+
+  <!-- ============ 05 — 26 DE JULIO ============ data-dot="4" -->
+  <section class="screen-step" id="s-veintiseis" data-dot="4">
+    <div class="screen-inner">
+      <div class="big-date seq" data-delay="0">
+        <span class="big-date-day">26</span>
+        <span class="big-date-month">JULIO</span>
+        <span class="big-date-year">2026</span>
+      </div>
+      <!-- MODIFICAR AQUÍ: cada línea aparece con su propio tiempo -->
+      <p class="milestone-line seq" data-delay="700">Ese día pasó algo.</p>
+      <p class="milestone-line seq" data-delay="1400">Te llevé chocolate.</p>
+
+      <div class="choco-card seq" data-delay="1400" tabindex="0" role="img" aria-label="Una chocolatina">
+        <div class="choco-wrapper">
+          <div class="choco-bar">
+            <span class="choco-square"></span>
+            <span class="choco-square"></span>
+            <span class="choco-square choco-piece"></span>
+            <span class="choco-square"></span>
+            <span class="choco-square"></span>
+            <span class="choco-square"></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="milestone-line seq" data-delay="2200">Nos besamos. <span class="heart-mark">❤️</span></p>
+      <p class="milestone-emph seq" data-delay="3000">Y desde entonces, esta fecha tiene otro significado.</p>
+
+      <button class="btn-ghost seq" data-delay="3600">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ============ 06 — EL PARQUE ============ data-dot="5" -->
+  <section class="screen-step" id="s-parque" data-dot="5">
+    <div class="screen-inner">
+      <div class="visual-box">
+        <div class="gate-card" aria-hidden="true">
+          <div class="gate" id="gate">
+            <span class="gate-bar"></span>
+            <span class="gate-bar"></span>
+            <span class="gate-bar"></span>
+            <span class="gate-bar"></span>
+            <span class="gate-lock"></span>
+          </div>
+        </div>
+      </div>
+      <h2>Y como toda buena historia, también tuvimos que liarla un poco.</h2>
+      <!-- MODIFICAR AQUÍ -->
+      <p>Entramos tarde a un parque.</p>
+      <p>El parque estaba cerrando.</p>
+      <p>Y casi conseguimos quedarnos dentro.</p>
+      <p class="humor">Gran planificación. 😂</p>
+      <button class="btn-ghost" id="btn-parque-salir">Por suerte salimos →</button>
+    </div>
+  </section>
+
+  <!-- ============ 07 — EL ATARDECER ============ data-dot="6" -->
+  <section class="screen-step" id="s-atardecer" data-dot="6">
+    <div class="screen-inner">
+      <div class="visual-box">
+        <div class="sunset-card" aria-hidden="true">
+          <div class="sunset-sky">
+            <div class="sunset-sun"></div>
+            <div class="sunset-hill"></div>
+          </div>
+        </div>
+      </div>
+      <h2>Y también hubo atardeceres.</h2>
+      <!-- MODIFICAR AQUÍ -->
+      <p>Te llevé a las Siete Tetas para enseñarte el atardecer.</p>
+      <p>Y creo que me gustaba la idea de enseñarte sitios que me gustan.</p>
+      <p class="milestone-emph">Poco a poco. Sin hacer demasiado ruido.</p>
+      <button class="btn-ghost">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ============ 08 — Y AQUÍ ESTAMOS ============ data-dot="7" -->
+  <section class="screen-step" id="s-ahora" data-dot="7">
+    <div class="screen-inner">
+      <h2>Y aquí estamos.</h2>
+      <!-- MODIFICAR AQUÍ -->
+      <p class="seq" data-delay="0">Después de partidos.</p>
+      <p class="seq" data-delay="450">De planes.</p>
+      <p class="seq" data-delay="900">De atardeceres.</p>
+      <p class="seq" data-delay="1350">De chocolate.</p>
+      <p class="seq" data-delay="1800">Y de alguna que otra decisión cuestionable con los horarios de los parques... 😂</p>
+      <p class="milestone-emph seq" data-delay="2500">Y resulta que ahora estamos juntos.</p>
+      <p class="mid-line seq" data-delay="3100">Todavía nos queda bastante por descubrir.</p>
+
+      <!-- MODIFICAR AQUÍ: tarjetas -->
+      <div class="future-grid">
+        <button class="future-card" type="button">
+          <span class="future-face future-front"><span class="future-label">Más partidos</span></span>
+          <span class="future-face future-back">Aunque todavía tengo trabajo con el saque.</span>
+        </button>
+        <button class="future-card" type="button">
+          <span class="future-face future-front"><span class="future-label">Más atardeceres</span></span>
+          <span class="future-face future-back">Hay sitios que merece la pena compartir.</span>
+        </button>
+        <button class="future-card" type="button">
+          <span class="future-face future-front"><span class="future-label">Más chocolate</span></span>
+          <span class="future-face future-back">Este punto está bastante claro.</span>
+        </button>
+        <button class="future-card" type="button">
+          <span class="future-face future-front"><span class="future-label">Más historias</span></span>
+          <span class="future-face future-back">Esta parte todavía está por escribir.</span>
+        </button>
+      </div>
+
+      <button class="btn-ghost">Hay una última cosa →</button>
+    </div>
+  </section>
+
+  <!-- ============ 09 — LO QUE VIENE ============ data-dot="8" -->
+  <section class="screen-step" id="s-viene" data-dot="8">
+    <div class="screen-inner">
+      <!-- MODIFICAR AQUÍ -->
+      <p class="milestone-line seq" data-delay="0">Y si algo tengo claro después de estos meses...</p>
+      <p class="mid-line seq" data-delay="700">me apetece seguir descubriendo todo lo que nos queda.</p>
+      <p class="mid-line seq" data-delay="1400">Sin saber exactamente qué viene después.</p>
+      <p class="milestone-emph seq" data-delay="2100">Pero con ganas de verlo.</p>
+      <button class="btn-ghost seq" data-delay="2700">Ahora sí →</button>
+    </div>
+  </section>
+
+  <!-- ============ 10 — LA PREGUNTA ============ data-dot="9" -->
+  <section class="screen-step dark-step" id="s-pregunta" data-dot="9">
+    <div class="screen-inner">
+      <!-- MODIFICAR AQUÍ -->
+      <p class="question-lead seq" data-delay="0">Aquella vez decidimos que queríamos intentarlo.</p>
+      <p class="question-sub seq" data-delay="700">Esta vez quería preguntártelo de una forma un poquito más bonita.</p>
+      <p class="question-main seq" data-delay="1500">¿Lo hacemos oficial? ❤️</p>
+
+      <div class="question-buttons seq" data-delay="2200">
+        <button class="btn-solid" id="btn-yes">Sí, quiero ❤️</button>
+        <button class="btn-text" id="btn-maybe">Creo que te lo estás currando demasiado</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 — EL SÍ ============ sin puntos -->
+  <section class="screen-step dark-step" id="s-si">
+    <div class="dim-overlay" id="dim-overlay" aria-hidden="true"></div>
+    <div class="celebration" id="celebration" aria-hidden="true"></div>
+    <div class="screen-inner">
+      <!-- MODIFICAR AQUÍ: cada línea es un "momento" independiente -->
+      <p class="si-word seq" data-delay="700">Vale.</p>
+      <p class="si-line seq" data-delay="1600">Entonces queda oficialmente registrado.</p>
+      <p class="si-date seq" data-delay="2600">26.07.2026 ❤️</p>
+      <p class="si-word seq" data-delay="3600">Ahora sí.</p>
+      <p class="si-close seq" data-delay="4500">Tenemos historia que seguir escribiendo.<br>Y me apetece descubrir lo que viene contigo.</p>
+      <button class="btn-ghost seq" data-delay="5400">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ============ 12 — FINAL ============ sin puntos -->
+  <section class="screen-step" id="s-final">
+    <div class="screen-inner">
+      <!-- MODIFICAR AQUÍ -->
+      <p class="finale-title seq" data-delay="0">Esto acaba de empezar.</p>
+      <p class="finale-date-light seq" data-delay="700">26.07.2026 ❤️</p>
+      <p class="finale-thanks seq" data-delay="1400">Gracias por formar parte de esta pequeña historia.</p>
+      <button class="egg-word egg-atleti seq" data-delay="2100" id="egg-atleti" type="button">PD: todavía tengo que aprender a sobrevivir a un partido del Atleti contigo. 😂</button>
+      <button class="btn-ghost seq" data-delay="2100" id="btn-restart">Volver al principio</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Puntos de progreso -->
+<div class="progress-dots" id="progress-dots" aria-hidden="true">
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
