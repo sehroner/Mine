@@ -102,7 +102,7 @@
     </div>
   </section>
 
-  <!-- ============ 05 — 24 DE JULIO ============ data-dot="4" -->
+  <!-- ============ 05 — 26 DE JULIO ============ data-dot="4" -->
   <section class="screen-step" id="s-veintiseis" data-dot="4">
     <div class="screen-inner">
       <div class="big-date seq" data-delay="0">
@@ -265,10 +265,53 @@
       <p class="finale-date-light seq" data-delay="700">24.07.2026 ❤️</p>
       <p class="finale-thanks seq" data-delay="1400">Gracias por formar parte de esta pequeña historia.</p>
       <button class="egg-word egg-atleti seq" data-delay="2100" id="egg-atleti" type="button">PD: todavía tengo que aprender a sobrevivir a un partido del Atleti contigo. 😂</button>
-      <button class="btn-ghost seq" data-delay="2100" id="btn-restart">Volver al principio</button>
+      <button class="btn-ghost seq" data-delay="2600" id="btn-continue-p2">Desde entonces... →</button>
+      <button class="btn-text seq" data-delay="2600" id="btn-restart">Volver al principio</button>
     </div>
   </section>
 
+  <!-- ============ PUENTE — "DESDE ENTONCES..." ============ sin puntos.
+       Pantalla corta que conecta la primera historia con la línea
+       temporal de la Parte 2. No hay acceso directo a esta pantalla
+       desde ningún otro punto de la web. -->
+  <section class="screen-step dark-step" id="s-puente">
+    <div class="screen-inner">
+      <p class="si-word seq" data-delay="300">Desde entonces...</p>
+      <p class="si-line seq" data-delay="1100">la historia ha seguido.</p>
+      <button class="btn-ghost seq" data-delay="1900" id="btn-ver-recuerdos">Ver los recuerdos →</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     PARTE 2 — "DESDE ENTONCES..."
+     Línea temporal con scroll vertical propio. Se muestra por
+     encima de la Parte 1 cuando el usuario pulsa "Ver los
+     recuerdos →" (o directamente en visitas futuras, ver
+     script.js). Los recuerdos se generan dinámicamente desde la
+     lista RECUERDOS en script.js — para añadir uno nuevo no hace
+     falta tocar este HTML.
+     ============================================================ -->
+<div class="timeline-view" id="timeline-view" hidden>
+  <nav class="timeline-nav">
+    <button class="timeline-back" id="btn-volver-historia" type="button">‹ Nuestra historia</button>
+    <span class="timeline-nav-sep">·</span>
+    <span class="timeline-nav-current">Desde entonces</span>
+  </nav>
+
+  <div class="timeline-header">
+    <h1>Desde entonces...</h1>
+    <p>Lo que ha venido después.</p>
+  </div>
+
+  <!-- MODIFICAR AQUÍ los recuerdos: en script.js, dentro de la
+       lista RECUERDOS. Este contenedor se rellena por JavaScript. -->
+  <div class="timeline-list" id="timeline-list"></div>
+
+  <div class="timeline-footer">
+    <p>Se sigue escribiendo.</p>
+  </div>
 </div>
 
 <!-- Puntos de progreso -->

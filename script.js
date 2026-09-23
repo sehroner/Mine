@@ -8,7 +8,7 @@ const CONFIG = {
   nombreElla: "",
   nombreYo: "",
 
-  fecha: "26.07.2026",
+  fecha: "24.07.2026",
 
   mensajeEggSeco: "Sigo trabajando en ello. 😂",
   mensajeEggAtleti: "🔴⚪ ya me estoy preparando mentalmente.",
@@ -21,11 +21,54 @@ const CONFIG = {
   // carpeta /music y escribe su ruta, por ejemplo:
   // "music/nuestra-cancion.mp3". Si lo dejas en null, el botón
   // de música no aparece.
-  musicSrc: null,
+  musicSrc: "music/nuestra-cancion.mp3",
 
   // Número de partículas en la animación de celebración.
   numeroParticulas: 12,
 };
+
+// ============================================================
+// ===== RECUERDOS (Parte 2 — "Desde entonces...") =====
+// Añade aquí nuevos recuerdos según vayan pasando. Cada objeto
+// se convierte automáticamente en una entrada de la línea
+// temporal — no hace falta tocar el HTML.
+//
+// Campos:
+//   date   (obligatorio) — texto, p. ej. "18.09.2026"
+//   title  (obligatorio)
+//   text   (obligatorio)
+//   image  (opcional) — ruta dentro de img/, p. ej. "img/viaje.jpg".
+//          Si el archivo no existe todavía, la web sigue
+//          funcionando: la zona de la foto simplemente no se
+//          muestra.
+//   song   (opcional, de momento sin uso visual — preparado para
+//          el futuro por si quieres asociar canciones a un
+//          recuerdo concreto)
+// ============================================================
+const RECUERDOS = [
+  {
+    date: "24.07.2026",
+    title: "El comienzo",
+    text: "El día que empezó todo esto.",
+  },
+  {
+    // MODIFICAR AQUÍ: coloca la foto en img/primer-recuerdo.jpg
+    date: "18.09.2026",
+    title: "La boda",
+    text: "El primer recuerdo que llegó después de aquella historia. También el día en que te di el llavero que ahora lleva este mismo QR contigo a todas partes.",
+    image: "img/primer-recuerdo.jpg",
+  },
+];
+
+// Elementos que representan lo que todavía está por vivir. Se
+// muestran siempre al final de la lista, con un estilo distinto
+// (punto hueco, texto más apagado) para que no se confundan con
+// recuerdos reales.
+const PROXIMOS = [
+  { title: "Próximo recuerdo", text: "Por descubrir." },
+  { title: "Próxima aventura", text: "Sin fecha todavía." },
+  { title: "Próximo capítulo", text: "Esta parte todavía está por escribir." },
+];
 
 // ---------------------------------------------------------------
 // Estado de navegación entre pantallas
@@ -86,7 +129,7 @@ runSequence(steps[currentIndex]);
 // tarjetas, la pregunta, reinicio) tienen su propio listener y no
 // llevan la clase "next-btn".
 // ---------------------------------------------------------------
-document.querySelectorAll(".screen-step .btn-ghost:not(#btn-restart)").forEach((btn) => {
+document.querySelectorAll(".screen-step .btn-ghost:not(#btn-restart):not(#btn-ver-recuerdos)").forEach((btn) => {
   if (btn.id === "btn-parque-salir") return; // tiene su propia animación, ver más abajo
   btn.addEventListener("click", () => goToStep(currentIndex + 1));
 });
@@ -110,6 +153,125 @@ if (btnParqueSalir) {
 const btnRestart = document.getElementById("btn-restart");
 if (btnRestart) {
   btnRestart.addEventListener("click", () => goToStep(0));
+}
+
+// ============================================================
+// PARTE 2 — "Desde entonces..." (línea temporal)
+// ============================================================
+const screensContainer = document.getElementById("screens");
+const timelineView = document.getElementById("timeline-view");
+const timelineList = document.getElementById("timeline-list");
+const STORAGE_KEY = "nuestra-historia-vista";
+
+// Construye una entrada de la línea temporal a partir de un
+// recuerdo (real o "próximo").
+function crearEntradaTimeline(recuerdo, esProximo) {
+  const entry = document.createElement("div");
+  entry.className = "timeline-entry" + (esProximo ? " upcoming" : "");
+
+  if (recuerdo.date) {
+    const date = document.createElement("p");
+    date.className = "timeline-entry-date";
+    date.textContent = recuerdo.date;
+    entry.appendChild(date);
+  }
+
+  const title = document.createElement("p");
+  title.className = "timeline-entry-title";
+  title.textContent = recuerdo.title;
+  entry.appendChild(title);
+
+  if (recuerdo.image) {
+    const photo = document.createElement("div");
+    photo.className = "timeline-entry-photo";
+    const img = document.createElement("img");
+    img.src = recuerdo.image;
+    img.alt = "";
+    img.loading = "lazy";
+    // Si la foto todavía no existe, ocultamos la zona entera en
+    // vez de mostrar un icono de imagen rota.
+    img.addEventListener("error", () => photo.classList.add("no-photo"));
+    photo.appendChild(img);
+    entry.appendChild(photo);
+  }
+
+  const text = document.createElement("p");
+  text.className = "timeline-entry-text";
+  text.textContent = recuerdo.text;
+  entry.appendChild(text);
+
+  return entry;
+}
+
+function renderTimeline() {
+  if (!timelineList) return;
+  timelineList.innerHTML = "";
+  RECUERDOS.forEach((recuerdo) => timelineList.appendChild(crearEntradaTimeline(recuerdo, false)));
+  PROXIMOS.forEach((recuerdo) => timelineList.appendChild(crearEntradaTimeline(recuerdo, true)));
+
+  // Revelado sutil al hacer scroll, igual que el resto de la web.
+  const entries = timelineList.querySelectorAll(".timeline-entry");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (changes) => {
+        changes.forEach((change) => {
+          if (change.isIntersecting) {
+            change.target.classList.add("in-view");
+            observer.unobserve(change.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -30px 0px" }
+    );
+    entries.forEach((entry) => observer.observe(entry));
+  } else {
+    entries.forEach((entry) => entry.classList.add("in-view"));
+  }
+}
+
+function marcarHistoriaVista() {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, "1");
+  } catch (e) {
+    // Si el navegador bloquea localStorage (modo privado, etc.),
+    // simplemente no recordamos la visita. No rompe nada.
+  }
+}
+
+function historiaYaVista() {
+  try {
+    return window.localStorage.getItem(STORAGE_KEY) === "1";
+  } catch (e) {
+    return false;
+  }
+}
+
+function mostrarTimeline() {
+  renderTimeline();
+  if (screensContainer) screensContainer.style.display = "none";
+  if (dotsContainer) dotsContainer.classList.add("hidden");
+  if (timelineView) timelineView.hidden = false;
+  marcarHistoriaVista();
+  updateMusicVisibility();
+}
+
+function mostrarHistoriaOriginal() {
+  if (timelineView) timelineView.hidden = true;
+  if (screensContainer) screensContainer.style.display = "";
+  updateMusicVisibility();
+}
+
+const btnVerRecuerdos = document.getElementById("btn-ver-recuerdos");
+if (btnVerRecuerdos) {
+  btnVerRecuerdos.addEventListener("click", mostrarTimeline);
+}
+
+const btnVolverHistoria = document.getElementById("btn-volver-historia");
+if (btnVolverHistoria) {
+  btnVolverHistoria.addEventListener("click", () => {
+    mostrarHistoriaOriginal();
+    goToStep(0);
+  });
 }
 
 // ---------------------------------------------------------------
@@ -220,13 +382,29 @@ if (btnYes) {
 // ---------------------------------------------------------------
 // Música opcional. Los navegadores bloquean el autoplay, así que
 // la música solo se activa cuando el usuario pulsa el botón.
+// Se prioriza en la Parte 2 ("Desde entonces...") para no
+// interferir con la experiencia original: el botón solo se
+// muestra mientras se está viendo la línea temporal.
 // ---------------------------------------------------------------
 const musicBtn = document.getElementById("music-toggle");
+let musicReady = false;
+let audio = null;
+let playing = false;
+
+function updateMusicVisibility() {
+  if (!musicBtn) return;
+  if (!musicReady) {
+    musicBtn.style.display = "none";
+    return;
+  }
+  const enTimeline = timelineView && !timelineView.hidden;
+  musicBtn.style.display = enTimeline ? "flex" : "none";
+}
 
 if (CONFIG.musicSrc) {
-  const audio = new Audio(CONFIG.musicSrc);
+  musicReady = true;
+  audio = new Audio(CONFIG.musicSrc);
   audio.loop = true;
-  let playing = false;
 
   musicBtn.addEventListener("click", () => {
     if (!playing) {
@@ -243,6 +421,14 @@ if (CONFIG.musicSrc) {
       playing = false;
     }
   });
-} else if (musicBtn) {
-  musicBtn.style.display = "none";
+}
+
+updateMusicVisibility();
+
+// En visitas futuras (mismo dispositivo/navegador), si ya vivió la
+// historia original al menos una vez, se entra directamente en los
+// recuerdos al abrir la web. La primera vez siempre se ve primero
+// la historia completa.
+if (historiaYaVista()) {
+  mostrarTimeline();
 }

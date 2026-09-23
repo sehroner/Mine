@@ -176,7 +176,7 @@ p { margin: 0 0 0.8rem; }
 .btn-text {
   display: block;
   font-size: 0.83rem;
-  color: rgba(247, 244, 238, 0.65);
+  color: rgba(32, 29, 26, 0.55);
   background: transparent;
   border: none;
   padding: 0.6rem 1rem;
@@ -186,7 +186,9 @@ p { margin: 0 0 0.8rem; }
   text-underline-offset: 3px;
   margin: 0.5rem auto 0;
 }
-.btn-text:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.btn-text:focus-visible { outline: 2px solid var(--wine); outline-offset: 2px; }
+.dark-step .btn-text { color: rgba(247, 244, 238, 0.65); }
+.dark-step .btn-text:focus-visible { outline-color: var(--cream); }
 
 .question-buttons { display: flex; flex-direction: column; align-items: center; }
 
@@ -377,4 +379,151 @@ p { margin: 0 0 0.8rem; }
 /* ================= ESCRITORIO ================= */
 @media (min-width: 760px) {
   .screen-inner { max-width: 460px; }
+}
+
+/* ============================================================
+   PARTE 2 — "DESDE ENTONCES..." (línea temporal con scroll)
+   ============================================================ */
+.timeline-view {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--cream);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: calc(3.4rem + env(safe-area-inset-top)) 1.3rem calc(3rem + env(safe-area-inset-bottom));
+}
+.timeline-view[hidden] { display: none; }
+
+.timeline-nav {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.9rem 1rem;
+  background: rgba(247, 244, 238, 0.9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  z-index: 45;
+}
+.timeline-back {
+  font: inherit;
+  background: transparent;
+  border: none;
+  color: var(--wine);
+  cursor: pointer;
+  padding: 0.4rem 0.3rem;
+  min-height: 36px;
+}
+.timeline-nav-sep { opacity: 0.5; }
+.timeline-nav-current { color: var(--ink-soft); }
+
+.timeline-header {
+  max-width: 420px;
+  margin: 0 auto 2.4rem;
+  text-align: center;
+}
+.timeline-header h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 7vw, 2.1rem);
+  color: var(--wine);
+  margin: 0 0 0.4rem;
+}
+.timeline-header p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+
+.timeline-list {
+  max-width: 420px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 1.6rem;
+}
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--line);
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 2.4rem;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.timeline-entry.in-view { opacity: 1; transform: translateY(0); }
+.timeline-entry::before {
+  content: "";
+  position: absolute;
+  left: -1.6rem;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--wine);
+}
+.timeline-entry-date {
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--wine-soft);
+  margin-bottom: 0.3rem;
+}
+.timeline-entry-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.timeline-entry-text {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+.timeline-entry-photo {
+  margin: 0.8rem 0 0.9rem;
+  max-width: 260px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--cream-soft);
+}
+.timeline-entry-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.timeline-entry-photo.no-photo { display: none; }
+
+/* Entradas "por venir": mismo estilo, pero atenuado y con el
+   punto hueco, para que se note que todavía no han pasado. */
+.timeline-entry.upcoming::before {
+  background: transparent;
+  border: 1px solid var(--ink-soft);
+  opacity: 0.5;
+}
+.timeline-entry.upcoming .timeline-entry-title { color: var(--ink-soft); font-style: italic; }
+.timeline-entry.upcoming .timeline-entry-text { opacity: 0.75; }
+.timeline-entry.upcoming .timeline-entry-date { color: var(--ink-soft); opacity: 0.6; }
+
+.timeline-footer {
+  max-width: 420px;
+  margin: 1rem auto 0;
+  text-align: center;
+}
+.timeline-footer p {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
 }
