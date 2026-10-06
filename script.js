@@ -21,7 +21,7 @@ const CONFIG = {
   // carpeta /music y escribe su ruta, por ejemplo:
   // "music/nuestra-cancion.mp3". Si lo dejas en null, el botón
   // de música no aparece.
-  musicSrc: null,
+  musicSrc: "music/nuestra-cancion2.mp3",
 
   // Número de partículas en la animación de celebración.
   numeroParticulas: 12,
@@ -58,6 +58,13 @@ const RECUERDOS = [
     text: "El primer recuerdo que llegó después de aquella historia. También el día en que te di el llavero que ahora lleva este mismo QR contigo a todas partes.",
     image: "img/primer-recuerdo.jpg",
   },
+  {
+    // MODIFICAR AQUÍ: coloca la foto en img/primer-recuerdo.jpg
+    date: "04.10.2026",
+    title: "Women Padel OYSHO",
+    text: "Un fin de semana entero animándote, hasta que lo ganaste. Con algún cabreo incluido y yo sufriendo a pie de pista, pero al fin... logro conseguido CAMPEONA.",
+    image: "img/segundo-recuerdo.jpeg",
+  },  
 ];
 
 // Elementos que representan lo que todavía está por vivir. Se
