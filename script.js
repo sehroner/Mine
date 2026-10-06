@@ -21,7 +21,7 @@ const CONFIG = {
   // carpeta /music y escribe su ruta, por ejemplo:
   // "music/nuestra-cancion.mp3". Si lo dejas en null, el botón
   // de música no aparece.
-  musicSrc: "music/nuestra-cancion.mp3",
+  musicSrc: null,
 
   // Número de partículas en la animación de celebración.
   numeroParticulas: 12,
